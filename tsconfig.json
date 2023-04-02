@@ -10,10 +10,7 @@
             {
                 "name": "typescript-plugin-css-modules"
             }
-        ],
-        "paths": {
-            "*": ["./@mf-types/*"]
-        }
+        ]
     },
     "include": [
         "./src",
