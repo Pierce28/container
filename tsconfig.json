@@ -3,12 +3,17 @@
         "target": "es5",
         "module": "commonjs",
         "sourceMap": true,
+        "strict": true,
+        "baseUrl": ".",
         "jsx": "react-jsx",
         "plugins": [
             {
                 "name": "typescript-plugin-css-modules"
             }
-        ]
+        ],
+        "paths": {
+            "*": ["./@mf-types/*"]
+        }
     },
     "include": [
         "./src",

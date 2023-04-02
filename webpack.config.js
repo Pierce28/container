@@ -1,15 +1,25 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { ModuleFederationPlugin } = require('webpack').container;
+
+const federationConfig = {
+    name: 'container',
+    filename: 'remoteEntry.js',
+    remotes: {
+        mfe: "mfe@http://localhost:3001/remoteEntry.js",
+    },
+    // shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+};
 
 module.exports = {
     entry: "./src/index.ts",
+    mode: 'development',
     output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "build"),
+        publicPath: 'auto',
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, "build"),
+            directory: path.join(__dirname, "dist"),
         },
         port: 3000,
     },
@@ -37,6 +47,7 @@ module.exports = {
         extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
     },
     plugins: [
+        new ModuleFederationPlugin(federationConfig),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "public", "index.html"),
         }),
